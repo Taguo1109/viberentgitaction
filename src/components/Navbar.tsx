@@ -53,7 +53,7 @@ const Navbar = () => {
               startIcon={<PersonOutlineIcon />}
               color='primary'
             >
-              會員
+              會員資料
             </Button>
           </Box>
         </Toolbar>
