@@ -11,7 +11,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
+      <Router basename="/viberentgitaction">
         <Box
           sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}
         >
