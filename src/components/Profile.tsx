@@ -25,10 +25,13 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
+        const token = localStorage.getItem('access_token');
         const res = await axios.get('http://localhost:8080/user/profile', {
-          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
-
+        
         if (res.data.status_code === '0000') {
           setProfile(res.data.data); // 取出 data 欄位
         } else {
@@ -73,10 +76,22 @@ const Profile = () => {
         <Typography variant='h5' gutterBottom color='primary.main'>
           會員資料
         </Typography>
-        <Typography variant='body1'><strong>使用者名稱：</strong>{profile?.username}</Typography>
-        <Typography variant='body1'><strong>Email：</strong>{profile?.email}</Typography>
-        <Typography variant='body1'><strong>使用者ID：</strong>{profile?.id}</Typography>
-        <Typography variant='body1'><strong>角色：</strong>{profile?.role}</Typography>
+        <Typography variant='body1'>
+          <strong>使用者名稱：</strong>
+          {profile?.username}
+        </Typography>
+        <Typography variant='body1'>
+          <strong>Email：</strong>
+          {profile?.email}
+        </Typography>
+        <Typography variant='body1'>
+          <strong>使用者ID：</strong>
+          {profile?.id}
+        </Typography>
+        <Typography variant='body1'>
+          <strong>角色：</strong>
+          {profile?.role}
+        </Typography>
       </Paper>
     </Container>
   );
