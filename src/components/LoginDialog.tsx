@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import axios, { AxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginDialogProps {
   open: boolean;
@@ -20,6 +21,7 @@ const LoginDialog = ({ open, onClose }: LoginDialogProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     setLoading(true);
@@ -36,8 +38,12 @@ const LoginDialog = ({ open, onClose }: LoginDialogProps) => {
       );
 
       console.log('Login success:', response.data);
-      // 儲存 token 或其他使用者資訊
+      const profile = response.data;
+      localStorage.setItem('userProfile', JSON.stringify(profile));
+
       onClose();
+      navigate('/profile');
+
     } catch (error) {
       const err = error as AxiosError;
 
