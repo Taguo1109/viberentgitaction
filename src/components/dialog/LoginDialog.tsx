@@ -38,8 +38,11 @@ const LoginDialog = ({ open, onClose }: LoginDialogProps) => {
       );
 
       console.log('Login success:', response.data);
-      const token = response.data.data.access_token;
-      localStorage.setItem('access_token', token);
+      
+      const accesstoken = response.data.data.access_token;
+      const refreshtoken = response.data.data.refresh_token;
+      localStorage.setItem('access_token', accesstoken);
+      localStorage.setItem('refresh_token', refreshtoken);
 
       onClose();
       navigate('/profile');

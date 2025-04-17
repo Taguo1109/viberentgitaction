@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import {
   Container,
   Typography,
@@ -8,6 +8,7 @@ import {
   CircularProgress,
   Alert,
 } from '@mui/material';
+import api from '../utils/axiosInstance';
 
 // 這邊改成對應你的 data 內容
 interface UserProfile {
@@ -25,13 +26,8 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const token = localStorage.getItem('access_token');
-        const res = await axios.get('http://localhost:8080/user/profile', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        
+        const res = await api.get('/user/profile'); // 不用手動加 token，會自動附上 Bearer access_token
+
         if (res.data.status_code === '0000') {
           setProfile(res.data.data); // 取出 data 欄位
         } else {
@@ -39,6 +35,7 @@ const Profile = () => {
         }
       } catch (err) {
         const error = err as AxiosError;
+        console.error('取得會員資料失敗', error.response?.status, error.message);
         if (error.response?.status === 401) {
           setError('請先登入才能查看會員資料');
         } else {
