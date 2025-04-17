@@ -18,13 +18,10 @@ import axios from 'axios';
 import LogoutSuccessDialog from './dialog/LogoutSuccessDialog';
 
 const Navbar = () => {
-  
   const [loginOpen, setLoginOpen] = useState(false);
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const isLoggedIn = Boolean(localStorage.getItem('access_token'));
 
-  // 使用 useNavigate 來進行導航
-  const navigate = useNavigate();
 
   const handleLogout = async () => {
     const accessToken = localStorage.getItem('access_token');
@@ -110,7 +107,7 @@ const Navbar = () => {
               open={logoutDialogOpen}
               onClose={() => {
                 setLogoutDialogOpen(false);
-                navigate('/');
+                window.location.href = import.meta.env.BASE_URL;
               }}
             />
           </Box>
