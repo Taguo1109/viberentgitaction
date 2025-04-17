@@ -6,7 +6,7 @@ import {
   Box,
   Container,
 } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -18,9 +18,13 @@ import axios from 'axios';
 import LogoutSuccessDialog from './dialog/LogoutSuccessDialog';
 
 const Navbar = () => {
+  
   const [loginOpen, setLoginOpen] = useState(false);
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const isLoggedIn = Boolean(localStorage.getItem('access_token'));
+
+  // 使用 useNavigate 來進行導航
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     const accessToken = localStorage.getItem('access_token');
@@ -35,7 +39,6 @@ const Navbar = () => {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
       setLogoutDialogOpen(true);
-      
     } catch (error) {
       console.error('登出失敗', error);
     }
@@ -107,7 +110,7 @@ const Navbar = () => {
               open={logoutDialogOpen}
               onClose={() => {
                 setLogoutDialogOpen(false);
-                window.location.href = '/'; // 可加在 Dialog 關閉後跳轉
+                navigate('/');
               }}
             />
           </Box>
