@@ -10,8 +10,13 @@ import { Link as RouterLink } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import LoginIcon from '@mui/icons-material/Login';
+import { useState } from 'react';
+import LoginDialog from './LoginDialog';
 
 const Navbar = () => {
+  const [loginOpen, setLoginOpen] = useState(false);
+
   return (
     <AppBar position='sticky' color='secondary' elevation={0}>
       <Container maxWidth='lg'>
@@ -55,6 +60,15 @@ const Navbar = () => {
             >
               會員資料
             </Button>
+            <Button
+              startIcon={<LoginIcon />}
+              color='primary'
+              onClick={() => setLoginOpen(true)}
+            >
+              登入
+            </Button>
+            {/* 登入 Dialog */}
+            <LoginDialog open={loginOpen} onClose={() => setLoginOpen(false)} />
           </Box>
         </Toolbar>
       </Container>
