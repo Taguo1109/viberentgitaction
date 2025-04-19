@@ -27,7 +27,7 @@ const LoginDialog = ({ open, onClose }: LoginDialogProps) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        'http://localhost:8080/login',
+        'https://go-auth-system.zeabur.app/login',
         {
           email,
           password,

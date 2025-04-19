@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080', // 改成你的 API 網址
+  baseURL: 'https://go-auth-system.zeabur.app', // 改成你的 API 網址
   headers: {
     'Content-Type': 'application/json',
   },

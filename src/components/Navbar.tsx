@@ -28,7 +28,7 @@ const Navbar = () => {
     const refreshToken = localStorage.getItem('refresh_token');
 
     try {
-      await axios.post('http://localhost:8080/logout', {
+      await axios.post('https://go-auth-system.zeabur.app/logout', {
         access_token: accessToken,
         refresh_token: refreshToken,
       });
